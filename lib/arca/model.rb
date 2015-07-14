@@ -29,6 +29,16 @@ module Arca
         :file_path => source_location[0],
         :line_number => source_location[1]
       }
+    rescue NameError
+      {
+        :file_path => nil,
+        :line_number => nil
+      }
+    rescue TypeError
+      {
+        :file_path => nil,
+        :line_number => nil
+      }
     end
 
     def analyzed_callbacks
