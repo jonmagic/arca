@@ -45,10 +45,12 @@ module Arca
       @analyzed_callbacks ||= CALLBACKS.inject({}) do |result, callback_symbol|
         Array(callbacks[callback_symbol]).each do |callback_data|
           result[callback_symbol] ||= []
-          result[callback_symbol] << CallbackAnalysis.new({
+          callback_analysis = CallbackAnalysis.new({
             :model         => self,
             :callback_data => callback_data
           })
+
+          result[callback_symbol] << callback_analysis unless callback_analysis.target_file_path =~ /gems\/activerecord/
         end
         result
       end
