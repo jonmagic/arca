@@ -57,68 +57,69 @@ Next use `Arca[Ticket].report` to analyze the callbacks for the `Ticket` class.
 => "/Users/jonmagic/Projects/arca"
 > Arca[Ticket].report
 {
-  :model_class => "Ticket",
-  :model_file_path => "test/fixtures/ticket.rb",
-  :lines_between => 6,
-  :externals => 1,
-  :conditionals => 1,
-  :permutations => 2
+          :model_class => "Ticket",
+      :model_file_path => "test/fixtures/ticket.rb",
+  :number_of_callbacks => 3,
+        :lines_between => 6,
+            :externals => 1,
+         :conditionals => 1,
+         :permutations => 2
 }
 > Arca[Ticket].analyzed_callbacks
 {
   :before_save => [
     {
-      :callback => :before_save,
-      :callback_file_path => "test/fixtures/ticket.rb",
-      :callback_line_number => 5,
-      :target => :set_title,
-      :target_file_path => "test/fixtures/ticket.rb",
-      :target_line_number => 8,
-      :external => false,
-      :external_target => false,
-      :lines_to_target => 3,
-      :conditional => nil,
-      :conditional_target => nil,
-      :conditional_target_file_path => nil,
+      :callback                       => :before_save,
+      :callback_file_path             => "test/fixtures/ticket.rb",
+      :callback_line_number           => 5,
+      :target                         => :set_title,
+      :target_file_path               => "test/fixtures/ticket.rb",
+      :target_line_number             => 8,
+      :external                       => false,
+      :external_target                => false,
+      :lines_to_target                => 3,
+      :conditional                    => nil,
+      :conditional_target             => nil,
+      :conditional_target_file_path   => nil,
       :conditional_target_line_number => nil,
-      :external_conditional_target => nil,
-      :lines_to_conditional_target => nil
+      :external_conditional_target    => nil,
+      :lines_to_conditional_target    => nil
     },
     {
-      :callback => :before_save,
-      :callback_file_path => "test/fixtures/ticket.rb",
-      :callback_line_number => 6,
-      :target => :upcase_title,
-      :target_file_path => "test/fixtures/ticket.rb",
-      :target_line_number => 12,
-      :external => false,
-      :external_target => false,
-      :lines_to_target => 6,
-      :conditional => :if,
-      :conditional_target => :title_is_a_shout?,
-      :conditional_target_file_path => "test/fixtures/ticket.rb",
+      :callback                       => :before_save,
+      :callback_file_path             => "test/fixtures/ticket.rb",
+      :callback_line_number           => 6,
+      :target                         => :upcase_title,
+      :target_file_path               => "test/fixtures/ticket.rb",
+      :target_line_number             => 12,
+      :external                       => false,
+      :external_target                => false,
+      :lines_to_target                => 6,
+      :conditional                    => :if,
+      :conditional_target             => :title_is_a_shout?,
+      :conditional_target_file_path   => "test/fixtures/ticket.rb",
       :conditional_target_line_number => 16,
-      :external_conditional_target => false,
-      :lines_to_conditional_target => nil
+      :external_conditional_target    => false,
+      :lines_to_conditional_target    => nil
     }
   ],
-  :after_save => [
+  :after_save  => [
     {
-      :callback => :after_save,
-      :callback_file_path => "test/fixtures/announcements.rb",
-      :callback_line_number => 4,
-      :target => :announce_save,
-      :target_file_path => "test/fixtures/announcements.rb",
-      :target_line_number => 8,
-      :external => true,
-      :external_target => false,
-      :lines_to_target => 4,
-      :conditional => nil,
-      :conditional_target => nil,
-      :conditional_target_file_path => nil,
+      :callback                       => :after_save,
+      :callback_file_path             => "test/fixtures/announcements.rb",
+      :callback_line_number           => 4,
+      :target                         => :announce_save,
+      :target_file_path               => "test/fixtures/announcements.rb",
+      :target_line_number             => 8,
+      :external                       => true,
+      :external_target                => false,
+      :lines_to_target                => 4,
+      :conditional                    => nil,
+      :conditional_target             => nil,
+      :conditional_target_file_path   => nil,
       :conditional_target_line_number => nil,
-      :external_conditional_target => nil,
-      :lines_to_conditional_target => nil
+      :external_conditional_target    => nil,
+      :lines_to_conditional_target    => nil
     }
   ]
 }
