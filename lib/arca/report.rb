@@ -12,12 +12,13 @@ module Arca
 
     def to_hash
       {
-        :model_class     => model_class,
-        :model_file_path => Arca.relative_path(model_file_path),
-        :lines_between   => lines_between_callbacks,
-        :externals       => externals,
-        :conditionals    => conditionals,
-        :permutations    => permutations
+        :model_class         => model_class,
+        :model_file_path     => Arca.relative_path(model_file_path),
+        :number_of_callbacks => number_of_callbacks,
+        :lines_between       => lines_between_callbacks,
+        :externals           => externals,
+        :conditionals        => conditionals,
+        :permutations        => permutations
       }
     end
 
@@ -31,6 +32,10 @@ module Arca
 
     def model_file_path
       model.file_path
+    end
+
+    def number_of_callbacks
+      model.analyzed_callbacks_array.size
     end
 
     def lines_between_callbacks
@@ -50,7 +55,8 @@ module Arca
     end
 
     def conditionals
-      model.analyzed_callbacks_array.select {|analysis| analysis.conditional_symbol }.size
+      callbacks_by_unique_conditional_target = model.analyzed_callbacks_array.uniq {|analysis| analysis.conditional_target_symbol }
+      callbacks_by_unique_conditional_target.select {|analysis| analysis.conditional_symbol }.size
     end
 
     def permutations
