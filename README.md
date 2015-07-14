@@ -3,7 +3,7 @@
 Arca is a callback analyzer for ActiveRecord like models ideally suited for digging yourself out of callback hell. Arca helps you answer questions like:
 
 * how spread out callbacks are for each model
-* how many callbacks use conditionals like `:on`, `:if`, or `:unless`
+* how many callbacks use conditionals (`:if` and `:unless`)
 * how many possible permutations exist per callback type (`:commit`, `:create`, `:destroy`, `:find`, `:initialize`, `:rollback`, `:save`, `:touch`, `:update`, `:validation`) taking conditionals into consideration
 
 The Arca library has two main components, the collector and the reporter. Include the collector module in each ActiveRecord model you want to analyze and then use the reporter to analyze and present the data.
