@@ -12,6 +12,10 @@ module Arca
     @root_path = path.to_s
   end
 
+  def self.root_path
+    @root_path
+  end
+
   def self.model_path=(path)
     @model_path = path.to_s
   end
