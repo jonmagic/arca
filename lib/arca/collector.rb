@@ -42,24 +42,25 @@ module Arca
           callback_method = singleton_class.instance_method(callback_symbol)
 
           define_singleton_method(callback_method.name) do |*args|
-            target_symbol             = args.shift
-            options                   = args.shift
-            callback_line_matches     = caller.first.match(ARCA_LINE_PARSER_REGEXP)
-            conditional_symbol        = ARCA_CONDITIONALS.find {|conditional| options && options.has_key?(conditional) }
-            conditional_target_symbol = if conditional_symbol
-              options[conditional_symbol]
-            end
+            options = args.pop if args[-1].is_a?(Hash)
+            args.each do |target_symbol|
+              callback_line_matches     = caller.first.match(ARCA_LINE_PARSER_REGEXP)
+              conditional_symbol        = ARCA_CONDITIONALS.find {|conditional| options && options.has_key?(conditional) }
+              conditional_target_symbol = if conditional_symbol
+                options[conditional_symbol]
+              end
 
-            arca_callback_data[callback_symbol] ||= []
-            arca_callback_data[callback_symbol] << {
-              :callback_symbol                => callback_symbol,
-              :callback_file_path             => callback_line_matches[1],
-              :callback_line_number           => callback_line_matches[2].to_i,
-              :target_symbol                  => target_symbol,
-              :conditional_symbol             => conditional_symbol,
-              :conditional_target_symbol      => conditional_target_symbol
-            }
-            callback_method.bind(self).call(*args)
+              arca_callback_data[callback_symbol] ||= []
+              arca_callback_data[callback_symbol] << {
+                :callback_symbol                => callback_symbol,
+                :callback_file_path             => callback_line_matches[1],
+                :callback_line_number           => callback_line_matches[2].to_i,
+                :target_symbol                  => target_symbol,
+                :conditional_symbol             => conditional_symbol,
+                :conditional_target_symbol      => conditional_target_symbol
+              }
+              callback_method.bind(self).call(*args)
+            end
           end
         end
       end
