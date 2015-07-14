@@ -12,9 +12,17 @@ module Arca
     @root_path = path.to_s
   end
 
+  def self.model_path=(path)
+    @model_path = path.to_s
+  end
+
+  def self.model_path
+    @model_path
+  end
+
   def self.relative_path(path)
     return if path.nil?
-    
+
     if @root_path
       path.sub(/^#{Regexp.escape(@root_path) || ""}\//, "")
     else

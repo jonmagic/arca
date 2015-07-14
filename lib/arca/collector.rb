@@ -44,7 +44,8 @@ module Arca
           define_singleton_method(callback_method.name) do |*args|
             options = args.pop if args[-1].is_a?(Hash)
             args.each do |target_symbol|
-              callback_line_matches     = caller.first.match(ARCA_LINE_PARSER_REGEXP)
+              line = caller.find {|line| line =~ /#{Regexp.escape(Arca.model_path)}/ }
+              callback_line_matches     = line.match(ARCA_LINE_PARSER_REGEXP)
               conditional_symbol        = ARCA_CONDITIONALS.find {|conditional| options && options.has_key?(conditional) }
               conditional_target_symbol = if conditional_symbol
                 options[conditional_symbol]
