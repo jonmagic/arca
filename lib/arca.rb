@@ -16,12 +16,12 @@ module Arca
     @root_path
   end
 
-  def self.model_path=(path)
-    @model_path = path.to_s
+  def self.model_root_path=(path)
+    @model_root_path = path.to_s
   end
 
-  def self.model_path
-    @model_path
+  def self.model_root_path
+    @model_root_path
   end
 
   def self.relative_path(path)

@@ -13,6 +13,7 @@ module Arca
   #        }
   #      ]}
   module Collector
+    class ModelRootPathRequired < StandardError; end
 
     ARCA_LINE_PARSER_REGEXP = /\A(.+)\:(\d+)\:in\s(.+)\z/
     private_constant :ARCA_LINE_PARSER_REGEXP
@@ -21,6 +22,8 @@ module Arca
     private_constant :ARCA_CONDITIONALS
 
     def self.included(base)
+      raise ModelRootPathRequired if Arca.model_root_path.nil?
+      
       # Get the file path to the model class that included the collector.
       model_file_path, = caller[0].partition(":")
 
@@ -44,7 +47,7 @@ module Arca
           define_singleton_method(callback_method.name) do |*args|
             options = args.pop if args[-1].is_a?(Hash)
             args.each do |target_symbol|
-              line = caller.find {|line| line =~ /#{Regexp.escape(Arca.model_path)}/ }
+              line = caller.find {|line| line =~ /#{Regexp.escape(Arca.model_root_path)}/ }
               callback_line_matches     = line.match(ARCA_LINE_PARSER_REGEXP)
               conditional_symbol        = ARCA_CONDITIONALS.find {|conditional| options && options.has_key?(conditional) }
               conditional_target_symbol = if conditional_symbol
