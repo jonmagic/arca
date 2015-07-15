@@ -50,7 +50,7 @@ module Arca
 
     def externals
       model.analyzed_callbacks_array.select do |analysis|
-        analysis.external? || analysis.external_target? || analysis.external_conditional_target?
+        analysis.external_callback? || analysis.external_target? || analysis.external_conditional_target?
       end.size
     end
 

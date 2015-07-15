@@ -65,6 +65,12 @@ class Arca::CallbackAnalysisTest < Minitest::Test
     assert_equal 6, upcase_title.callback_line_number
   end
 
+  def test_external_callback?
+    assert_predicate announce_save, :external_callback?
+    refute_predicate set_title, :external_callback?
+    refute_predicate upcase_title, :external_callback?
+  end
+
   def test_target_symbol
     assert_equal :announce_save, announce_save.target_symbol
     assert_equal :set_title, set_title.target_symbol
@@ -81,12 +87,6 @@ class Arca::CallbackAnalysisTest < Minitest::Test
     assert_equal 8, announce_save.target_line_number
     assert_equal 8, set_title.target_line_number
     assert_equal 12, upcase_title.target_line_number
-  end
-
-  def test_external?
-    assert_predicate announce_save, :external?
-    refute_predicate set_title, :external?
-    refute_predicate upcase_title, :external?
   end
 
   def test_external_target?

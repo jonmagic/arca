@@ -19,10 +19,10 @@ module Arca
         :callback                       => callback_symbol,
         :callback_file_path             => Arca.relative_path(callback_file_path),
         :callback_line_number           => callback_line_number,
+        :external_callback              => external_callback?,
         :target                         => target_symbol,
         :target_file_path               => Arca.relative_path(target_file_path),
         :target_line_number             => target_line_number,
-        :external                       => external?,
         :external_target                => external_target?,
         :lines_to_target                => lines_to_target,
         :conditional                    => conditional_symbol,
@@ -48,7 +48,7 @@ module Arca
       model.source_location(target_symbol)[:line_number]
     end
 
-    def external?
+    def external_callback?
       callback_file_path != model.file_path
     end
 
