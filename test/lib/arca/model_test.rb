@@ -28,11 +28,11 @@ class Arca::ModelTest < Minitest::Test
   end
 
   def test_analyzed_callbacks
-    assert_equal 2, model.analyzed_callbacks[:before_save].size
+    assert_equal 3, model.analyzed_callbacks[:before_save].size
     assert_equal 1, model.analyzed_callbacks[:after_save].size
   end
 
   def test_analyzed_callbacks_array
-    assert_equal 3, model.analyzed_callbacks_array.size
+    assert_equal 4, model.analyzed_callbacks_array.size
   end
 end

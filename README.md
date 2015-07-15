@@ -29,15 +29,18 @@ Include `Arca::Collector` in the models you want to analyze. It must be included
 
 ```ruby
 class Ticket < ActiveRecord::Base
-  include Arca::Collector if Rails.env.development?
-
+  include Arca::Collector
   include Announcements
 
-  before_save :set_title
+  before_save :set_title, :set_body
   before_save :upcase_title, :if => :title_is_a_shout?
 
   def set_title
     self.title ||= "Ticket id #{SecureRandom.hex(2)}"
+  end
+
+  def set_body
+    self.body ||= "Everything is broken."
   end
 
   def upcase_title
@@ -75,7 +78,7 @@ Next use `Arca[Ticket].report` to analyze the callbacks for the `Ticket` class.
 {
           :model_class => "Ticket",
       :model_file_path => "test/fixtures/ticket.rb",
-  :number_of_callbacks => 3,
+  :number_of_callbacks => 4,
         :lines_between => 6,
             :externals => 1,
          :conditionals => 1,
@@ -104,17 +107,34 @@ Next use `Arca[Ticket].report` to analyze the callbacks for the `Ticket` class.
     {
       :callback                       => :before_save,
       :callback_file_path             => "test/fixtures/ticket.rb",
+      :callback_line_number           => 5,
+      :external_callback              => false,
+      :target                         => :set_body,
+      :target_file_path               => "test/fixtures/ticket.rb",
+      :target_line_number             => 12,
+      :external_target                => false,
+      :lines_to_target                => 7,
+      :conditional                    => nil,
+      :conditional_target             => nil,
+      :conditional_target_file_path   => nil,
+      :conditional_target_line_number => nil,
+      :external_conditional_target    => nil,
+      :lines_to_conditional_target    => nil
+    },
+    {
+      :callback                       => :before_save,
+      :callback_file_path             => "test/fixtures/ticket.rb",
       :callback_line_number           => 6,
       :external_callback              => false,
       :target                         => :upcase_title,
       :target_file_path               => "test/fixtures/ticket.rb",
-      :target_line_number             => 12,
+      :target_line_number             => 16,
       :external_target                => false,
-      :lines_to_target                => 6,
+      :lines_to_target                => 10,
       :conditional                    => :if,
       :conditional_target             => :title_is_a_shout?,
       :conditional_target_file_path   => "test/fixtures/ticket.rb",
-      :conditional_target_line_number => 16,
+      :conditional_target_line_number => 20,
       :external_conditional_target    => false,
       :lines_to_conditional_target    => nil
     }
