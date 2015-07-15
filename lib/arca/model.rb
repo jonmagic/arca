@@ -1,5 +1,9 @@
 module Arca
   class Model
+
+    # Arca::Model wraps an ActiveRecord model class and provides an interface
+    # to the collected and analyzed callback data for that class and the file
+    # path to the model class.
     def initialize(klass)
       @klass = klass
       @name = klass.name
@@ -7,6 +11,8 @@ module Arca
       @file_path = callbacks.delete(:model_file_path)
     end
 
+    # Array of ActiveRecord callback method symbols in a rough order of when
+    # they are used in the life cycle of an ActiveRecord model.
     CALLBACKS = [
       :after_initialize, :after_find, :after_touch, :before_validation, :after_validation,
       :before_save, :around_save, :after_save, :before_create, :around_create,
@@ -14,15 +20,27 @@ module Arca
       :before_destroy, :around_destroy, :after_destroy, :after_commit, :after_rollback
     ]
 
+    # Public: ActiveRecord model class.
     attr_reader :klass
+
+    # Public: String model name.
     attr_reader :name
+
+    # Public: String file path.
     attr_reader :file_path
+
+    # Public: Hash of collected callback data.
     attr_reader :callbacks
 
+    # Public: Arca::Report for this model.
     def report
       @report ||= Report.new(self)
     end
 
+    # Public: Helper method for finding the file path and line number where
+    # a method is located for the ActiveRecord model.
+    #
+    # method_symbol - Symbol representation of the method name.
     def source_location(method_symbol)
       source_location = klass.instance_method(method_symbol).source_location
       {
@@ -41,6 +59,7 @@ module Arca
       }
     end
 
+    # Public: Hash of CallbackAnalysis objects for each callback type.
     def analyzed_callbacks
       @analyzed_callbacks ||= CALLBACKS.inject({}) do |result, callback_symbol|
         Array(callbacks[callback_symbol]).each do |callback_data|
@@ -56,6 +75,7 @@ module Arca
       end
     end
 
+    # Public: Array of all CallbackAnalysis objects for this model.
     def analyzed_callbacks_array
       @analyzed_callbacks_array ||= analyzed_callbacks.values.flatten
     end
