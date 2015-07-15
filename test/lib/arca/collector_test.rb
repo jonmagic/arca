@@ -36,4 +36,15 @@ class Arca::CollectorTest < Minitest::Test
     assert_equal :if, callback[:conditional_symbol]
     assert_equal :title_is_a_shout?, callback[:conditional_target_symbol]
   end
+
+  def test_arca_model_root_path_is_required
+    model_root_path = Arca.model_root_path
+    Arca.instance_variable_set(:@model_root_path, nil)
+
+    assert_raises(Arca::Collector::ModelRootPathRequired) do
+      require_relative "../../fixtures/foo"
+    end
+
+    Arca.model_root_path = model_root_path
+  end
 end
