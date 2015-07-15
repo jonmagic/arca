@@ -67,15 +67,30 @@ module Arca
     # Public: Integer representing the number of conditionals used in callback
     # for the model being reported.
     def conditionals
-      callbacks_by_unique_conditional_target = model.analyzed_callbacks_array.uniq {|analysis| analysis.conditional_target_symbol }
-      callbacks_by_unique_conditional_target.select {|analysis| analysis.conditional_symbol }.size
+      number_of_unique_conditionals(model.analyzed_callbacks_array)
     end
 
     # Public: Integer representing the possible number of permutations stemming
     # from conditionals for an instance of the model being reported during the
     # lifecycle of the object.
     def permutations
-      2**conditionals
+      permutations = model.analyzed_callbacks.inject([]) do |results, (key, analyzed_callbacks)|
+        results << 2**number_of_unique_conditionals(analyzed_callbacks)
+      end.sum - number_of_unique_conditionals(model.analyzed_callbacks_array)
     end
+
+    # Internal: Integer representing the number of unique conditions for an
+    # Array of CallbackAnalysis objects.
+    #
+    # analyzed_callbacks - Array of CallbackAnalysis objects.
+    #
+    # Returns an Integer.
+    def number_of_unique_conditionals(analyzed_callbacks)
+      analyzed_callbacks.
+        select {|analysis| analysis.conditional_symbol }.
+        uniq {|analysis| analysis.conditional_target_symbol }.
+        size
+    end
+    private :number_of_unique_conditionals
   end
 end
