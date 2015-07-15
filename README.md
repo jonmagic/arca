@@ -10,11 +10,27 @@ The Arca library has two main components, the collector and the reporter. Includ
 
 ## Usage
 
-Include `Arca::Collector` in the model you want to analyze before any other includes.
+Add the gem to your Gemfile and run `bundle`.
+
+```
+gem 'arca'
+```
+
+Add an initializer to require the library and configure it (`config/initializers/arca.rb` for example). There's no magic here and Arca doesn't assume your root project path or the path to your `ActiveRecord` models so you have to specify those paths yourself in the initializer.
+
+```
+require "arca"
+
+Arca.root_path = Rails.root
+Arca.model_path = Rails.root.join("app", "models")
+```
+
+Include `Arca::Collector` in the models you want to analyze. It must be included before any callbacks so I recommend including it right after the class definition.
 
 ```ruby
 class Ticket < ActiveRecord::Base
   include Arca::Collector if Rails.env.development?
+
   include Announcements
 
   before_save :set_title
