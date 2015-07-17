@@ -5,9 +5,14 @@ require_relative "arca/callback_analysis"
 
 module Arca
 
+  # Error raised if Arca[] is passed something other than a class constant.
+  class ClassRequired < StandardError; end
+
   # Public: Reader method for accessing the Arca::Model for analysis and
   # reporting.
   def self.[](klass)
+    raise ClassRequired unless klass.kind_of?(Class)
+
     Arca::Model.new(klass)
   end
 
