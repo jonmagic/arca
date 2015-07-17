@@ -43,13 +43,15 @@ module Arca
           # Redefine the callback method so that data can be collected each time
           # the callback is used for this class.
           define_singleton_method(callback_method.name) do |*args|
+            # Duplicate args before modifying.
+            args_copy = args.dup
 
             # Get the options hash from the end of the args Array if it exists.
-            options = args.pop if args[-1].is_a?(Hash)
+            options = args_copy.pop if args[-1].is_a?(Hash)
 
             # Iterate through the rest of the args. Each remaining arguement is
             # a Symbol representing the callback target method.
-            args.each do |target_symbol|
+            args_copy.each do |target_symbol|
 
               # Find the caller line where the callback is used.
               line = caller.find {|line| line =~ /#{Regexp.escape(Arca.model_root_path)}/ }
@@ -81,9 +83,10 @@ module Arca
                 :conditional_target_symbol      => conditional_target_symbol
               }
 
-              # Bind the callback method to self and call it with args.
-              callback_method.bind(self).call(*args)
             end
+
+            # Bind the callback method to self and call it with args.
+            callback_method.bind(self).call(*args)
           end
         end
       end

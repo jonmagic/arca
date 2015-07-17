@@ -42,9 +42,25 @@ class Arca::CollectorTest < Minitest::Test
     Arca.instance_variable_set(:@model_root_path, nil)
 
     assert_raises(Arca::Collector::ModelRootPathRequired) do
-      require_relative "../../fixtures/foo"
+      require_relative "../../fixtures/bar"
     end
 
     Arca.model_root_path = model_root_path
+  end
+
+  def test_callback_is_reapplied_with_original_args
+    foo = Foo.new
+    refute       foo.boop?
+    foo.save
+    assert       foo.mission_complete
+    assert_nil   foo.bargo
+    assert_nil   foo.bazinga
+
+    foo.boop =   true
+    assert       foo.boop?
+    foo.save
+    assert       foo.mission_complete
+    assert_equal "hello", foo.bargo
+    assert_equal "world", foo.bazinga
   end
 end

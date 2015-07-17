@@ -8,6 +8,7 @@ Arca.model_root_path = Arca.root_path + "/test/fixtures"
 
 require_relative "fixtures/announcements"
 require_relative "fixtures/ticket"
+require_relative "fixtures/foo"
 
 if ENV["CONSOLE"]
   require "pry"
