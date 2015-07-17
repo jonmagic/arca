@@ -81,5 +81,10 @@ module Arca
     def analyzed_callbacks_array
       @analyzed_callbacks_array ||= analyzed_callbacks.values.flatten
     end
+
+    # Public: Integer representing the number of callbacks analyzed.        
+    def analyzed_callbacks_count
+      analyzed_callbacks_array.size
+    end
   end
 end

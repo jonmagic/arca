@@ -13,19 +13,23 @@ class Arca::ReportTest < Minitest::Test
     assert_match "test/fixtures/ticket.rb", report.model_file_path
   end
 
-  def test_lines_between_callbacks
-    assert_equal 6, report.lines_between_callbacks
+  def callbacks_count
+    assert_equal 4, report.callbacks_count
   end
 
-  def test_externals
-    assert_equal 1, report.externals
+  def test_lines_between_count
+    assert_equal 6, report.lines_between_count
   end
 
-  def test_conditionals
-    assert_equal 1, report.conditionals
+  def test_included_callbacks_count
+    assert_equal 1, report.included_callbacks_count
   end
 
-  def test_permutations
-    assert_equal 2, report.permutations
+  def test_conditionals_count
+    assert_equal 1, report.conditionals_count
+  end
+
+  def test_calculated_permutations
+    assert_equal 2, report.calculated_permutations
   end
 end

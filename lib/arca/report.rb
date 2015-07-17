@@ -18,13 +18,13 @@ module Arca
     # Public: Hash of compiled report data.
     def to_hash
       {
-        :model_name          => model_name,
-        :model_file_path     => Arca.relative_path(model_file_path),
-        :number_of_callbacks => number_of_callbacks,
-        :lines_between       => lines_between_callbacks,
-        :externals           => externals,
-        :conditionals        => conditionals,
-        :permutations        => permutations
+        :model_name               => model_name,
+        :model_file_path          => Arca.relative_path(model_file_path),
+        :callbacks_count          => callbacks_count,
+        :lines_between_count      => lines_between_count,
+        :included_callbacks_count => included_callbacks_count,
+        :conditionals_count       => conditionals_count,
+        :calculated_permutations  => calculated_permutations
       }
     end
 
@@ -39,14 +39,14 @@ module Arca
     end
 
     # Public: Integer representing the number of callbacks used in this model.
-    def number_of_callbacks
-      model.analyzed_callbacks_array.size
+    def callbacks_count
+      model.analyzed_callbacks_count
     end
 
     # Public: Integer representing the total number of lines between callbacks
     # called for this class from files other than the one where the class is
     # defined.
-    def lines_between_callbacks
+    def lines_between_count
       lines_between = 0
       line_numbers = model.analyzed_callbacks_array.map &:callback_line_number
       sorted_line_numbers = line_numbers.sort {|a,b| b <=> a }
@@ -58,7 +58,7 @@ module Arca
 
     # Public: Integer representing the number of callbacks called for this class
     # from files other than the one where the class is defined.
-    def externals
+    def included_callbacks_count
       model.analyzed_callbacks_array.select do |analysis|
         analysis.external_callback? || analysis.external_target? || analysis.external_conditional_target?
       end.size
@@ -66,14 +66,14 @@ module Arca
 
     # Public: Integer representing the number of conditionals used in callback
     # for the model being reported.
-    def conditionals
+    def conditionals_count
       number_of_unique_conditionals(model.analyzed_callbacks_array)
     end
 
     # Public: Integer representing the possible number of permutations stemming
     # from conditionals for an instance of the model being reported during the
     # lifecycle of the object.
-    def permutations
+    def calculated_permutations
       permutations = model.analyzed_callbacks.inject([]) do |results, (key, analyzed_callbacks)|
         results << 2**number_of_unique_conditionals(analyzed_callbacks)
       end.sum - number_of_unique_conditionals(model.analyzed_callbacks_array)
