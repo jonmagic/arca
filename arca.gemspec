@@ -7,13 +7,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jonathan Hoyt"]
   spec.email         = "jonmagic@gmail.com"
   spec.require_paths = ["lib"]
-  spec.files         = [
-    "lib/arca.rb",
-    "lib/arca/callback_analysis.rb",
-    "lib/arca/collector.rb",
-    "lib/arca/model.rb",
-    "lib/arca/report.rb"
-  ]
+  spec.files         = `git ls-files -z`.split("\x0")
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.homepage      = "https://github.com/jonmagic/arca"
   spec.license       = "MIT"
 
