@@ -11,13 +11,13 @@ module Arca
     # model         - Arca::Model instance.
     # callback_data - Hash with callback data collected by Arca::Collector.
     def initialize(model:, callback_data:)
-      @model                          = model
-      @callback_symbol                = callback_data[:callback_symbol]
-      @callback_file_path             = callback_data[:callback_file_path]
-      @callback_line_number           = callback_data[:callback_line_number]
-      @target_symbol                  = callback_data[:target_symbol]
-      @conditional_symbol             = callback_data[:conditional_symbol]
-      @conditional_target_symbol      = callback_data[:conditional_target_symbol]
+      @model                     = model
+      @callback_symbol           = callback_data[:callback_symbol]
+      @callback_file_path        = callback_data[:callback_file_path]
+      @callback_line_number      = callback_data[:callback_line_number]
+      @target_symbol             = callback_data[:target_symbol]
+      @conditional_symbol        = callback_data[:conditional_symbol]
+      @conditional_target_symbol = callback_data[:conditional_target_symbol]
     end
 
     # Public: Hash representation of the object for interactive consoles.
