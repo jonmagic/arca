@@ -76,13 +76,15 @@ Next use `Arca[Ticket].report` to analyze the callbacks for the `Ticket` class.
 => "/Users/jonmagic/Projects/arca"
 > Arca[Ticket].report
 {
-                :model_name => "Ticket",
-           :model_file_path => "test/fixtures/ticket.rb",
-           :callbacks_count => 4,
-       :lines_between_count => 6,
-  :included_callbacks_count => 1,
-        :conditionals_count => 1,
-   :calculated_permutations => 2
+                   :model_name => "Ticket",
+              :model_file_path => "test/fixtures/ticket.rb",
+              :callbacks_count => 4,
+           :conditionals_count => 1,
+          :lines_between_count => 6,
+     :included_callbacks_count => 1,
+       :external_targets_count => 0,
+  :external_conditionals_count => 0,
+      :calculated_permutations => 2
 }
 > Arca[Ticket].analyzed_callbacks
 {
