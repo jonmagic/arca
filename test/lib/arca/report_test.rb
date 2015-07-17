@@ -17,14 +17,6 @@ class Arca::ReportTest < Minitest::Test
     assert_equal 4, report.callbacks_count
   end
 
-  def test_lines_between_count
-    assert_equal 6, report.lines_between_count
-  end
-
-  def test_included_callbacks_count
-    assert_equal 1, report.included_callbacks_count
-  end
-
   def test_conditionals_count
     assert_equal 1, report.conditionals_count
   end

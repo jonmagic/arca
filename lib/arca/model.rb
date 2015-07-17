@@ -82,9 +82,40 @@ module Arca
       @analyzed_callbacks_array ||= analyzed_callbacks.values.flatten
     end
 
-    # Public: Integer representing the number of callbacks analyzed.        
+    # Public: Integer representing the number of callbacks analyzed.
     def analyzed_callbacks_count
       analyzed_callbacks_array.size
+    end
+
+    # Public: Integer representing the total number of lines between callbacks
+    # called for this class from files other than the one where the class is
+    # defined.
+    def lines_between_count
+      lines_between = 0
+      line_numbers = analyzed_callbacks_array.map &:callback_line_number
+      sorted_line_numbers = line_numbers.sort {|a,b| b <=> a }
+      sorted_line_numbers.each_with_index do |line_number, index|
+        lines_between += line_number - (sorted_line_numbers[index + 1] || 0)
+      end
+      lines_between
+    end
+
+    # Public: Integer representing the number of callbacks called for this class
+    # from files other than this model.
+    def included_callbacks_count
+      analyzed_callbacks_array.select {|analysis| analysis.external_callback? }.size
+    end
+
+    # Public: Integer representing the number of callback targets that are
+    # defined in files other than this model.
+    def external_targets_count
+      analyzed_callbacks_array.select {|analysis| analysis.external_target? }.size
+    end
+
+    # Public: Integer representing the number of conditional callback targets
+    # that are defined in files other than this model.
+    def external_conditionals_count
+      analyzed_callbacks_array.select {|analysis| analysis.external_conditional_target? }.size
     end
   end
 end
