@@ -124,5 +124,11 @@ module Arca
 
       (conditional_target_line_number - callback_line_number).abs
     end
+
+    # Public: Boolean representing whether the callback target is located in the
+    # ActiveRecord gem.
+    def target_file_path_active_record?
+      target_file_path =~ /gems\/activerecord/
+    end
   end
 end

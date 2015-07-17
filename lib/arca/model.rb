@@ -69,7 +69,9 @@ module Arca
             :callback_data => callback_data
           })
 
-          result[callback_symbol] << callback_analysis unless callback_analysis.target_file_path =~ /gems\/activerecord/
+          unless callback_analysis.target_file_path_active_record?
+            result[callback_symbol] << callback_analysis
+          end
         end
         result
       end
