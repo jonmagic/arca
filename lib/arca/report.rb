@@ -18,7 +18,7 @@ module Arca
     # Public: Hash of compiled report data.
     def to_hash
       {
-        :model_class         => model_class,
+        :model_name          => model_name,
         :model_file_path     => Arca.relative_path(model_file_path),
         :number_of_callbacks => number_of_callbacks,
         :lines_between       => lines_between_callbacks,
@@ -29,7 +29,7 @@ module Arca
     end
 
     # Public: String class name of model.
-    def model_class
+    def model_name
       model.name
     end
 

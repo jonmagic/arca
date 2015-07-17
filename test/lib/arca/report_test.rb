@@ -6,7 +6,7 @@ class Arca::ReportTest < Minitest::Test
   end
 
   def test_model_class
-    assert_equal "Ticket", report.model_class
+    assert_equal "Ticket", report.model_name
   end
 
   def test_model_file_path
