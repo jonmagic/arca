@@ -8,10 +8,14 @@ module Arca
   # Error raised if Arca[] is passed something other than a class constant.
   class ClassRequired < StandardError; end
 
+  # Error raised if model does not respond to arca_callback_data
+  class CallbackDataMissing < StandardError; end
+
   # Public: Reader method for accessing the Arca::Model for analysis and
   # reporting.
   def self.[](klass)
     raise ClassRequired unless klass.kind_of?(Class)
+    raise CallbackDataMissing unless klass.respond_to?(:arca_callback_data)
 
     Arca::Model.new(klass)
   end

@@ -10,4 +10,10 @@ class ArcaTest < Minitest::Test
       Arca[:ticket]
     end
   end
+
+  def test_requires_callback_data
+    assert_raises(Arca::CallbackDataMissing) do
+      Arca[ArcaTest]
+    end
+  end
 end
