@@ -22,14 +22,14 @@ Add an initializer to require the library and configure it (`config/initializers
 require "arca"
 
 Arca.root_path = Rails.root
-Arca.model_path = Rails.root.join("app", "models")
+Arca.model_root_path = Rails.root.join("app", "models")
 ```
 
 Include `Arca::Collector` in the models you want to analyze. It must be included before any callbacks so I recommend including it right after the class definition.
 
 ```ruby
 class Ticket < ActiveRecord::Base
-  include Arca::Collector
+  include Arca::Collector if Rails.env.development?
   include Announcements
 
   before_save :set_title, :set_body
