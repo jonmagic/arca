@@ -45,8 +45,8 @@ class Arca::ModelTest < Minitest::Test
     assert_equal 6, model.lines_between_count
   end
 
-  def test_included_callbacks_count
-    assert_equal 1, model.included_callbacks_count
+  def test_external_callbacks_count
+    assert_equal 1, model.external_callbacks_count
   end
 
   def test_external_targets_count

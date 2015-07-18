@@ -102,7 +102,7 @@ module Arca
 
     # Public: Integer representing the number of callbacks called for this class
     # from files other than this model.
-    def included_callbacks_count
+    def external_callbacks_count
       analyzed_callbacks_array.select {|analysis| analysis.external_callback? }.size
     end
 

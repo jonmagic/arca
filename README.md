@@ -81,7 +81,7 @@ Next use `Arca[Ticket].report` to analyze the callbacks for the `Ticket` class.
               :callbacks_count => 4,
            :conditionals_count => 1,
           :lines_between_count => 6,
-     :included_callbacks_count => 1,
+     :external_callbacks_count => 1,
        :external_targets_count => 0,
   :external_conditionals_count => 0,
       :calculated_permutations => 2
