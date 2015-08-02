@@ -4,9 +4,6 @@ module Arca
   # about how callbacks are being used.
   module Collector
 
-    # Error raised if Arca.model_root_path is nil.
-    class ModelRootPathRequired < StandardError; end
-
     # Internal: Regular expression used for extracting the file path and line
     # number from a caller line.
     ARCA_LINE_PARSER_REGEXP = /\A(.+)\:(\d+)\:in\s(.+)\z/
@@ -18,9 +15,6 @@ module Arca
 
     # http://ruby-doc.org/core-2.2.1/Module.html#method-i-included
     def self.included(base)
-      # Raise error if Arca.model_root_path is nil.
-      raise ModelRootPathRequired if Arca.model_root_path.nil?
-
       # Get the file path to the model class that included the collector.
       model_file_path, = caller[0].partition(":")
 
