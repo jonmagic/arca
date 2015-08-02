@@ -20,7 +20,7 @@ module Arca
     Arca::Model.new(klass)
   end
 
-  # Public: (optional) Writer method for configuring the root path of the
+  # Public: Writer method for configuring the root path of the
   # project where  Arca is being used. Setting Arca.root_path will makes
   # inspecting analyzed callbacks easier by shortening absolute paths to
   # relative paths.
@@ -32,10 +32,10 @@ module Arca
 
   # Public: String representing the root path for the project.
   def self.root_path
-    @root_path
+    @root_path ||= `pwd`.chomp
   end
 
-  # Public: (required) Writer method for configuring the root path to the models
+  # Public: Writer method for configuring the root path to the models
   # for the project where Arca is being used. This path is required by the
   # Arca::Collector for finding the correct line in the caller Array.
   def self.model_root_path=(path)
@@ -44,7 +44,7 @@ module Arca
 
   # Public: String representing the path to the models for the project.
   def self.model_root_path
-    @model_root_path
+    @model_root_path ||= root_path + "/app/models"
   end
 
   # Public: Helper method for turning absolute paths into relative paths.

@@ -3,7 +3,6 @@ require "active_record"
 require "minitest/autorun"
 
 require "arca"
-Arca.root_path = `pwd`.chomp
 Arca.model_root_path = Arca.root_path + "/test/fixtures"
 
 require_relative "fixtures/announcements"
