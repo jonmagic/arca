@@ -35,11 +35,11 @@ module Arca
 
             # Add target_symbol :block to args_copy if a block was given.
             if block
-              args_copy << :block
-            else
-              # Get the options hash from the end of the args Array if it exists.
-              options = args_copy.pop if args[-1].is_a?(Hash)
+              args_copy.unshift(:block)
             end
+
+            # Get the options hash from the end of the args Array if it exists.
+            options = args_copy.pop if args[-1].is_a?(Hash)
 
             # Get the callback file path and line number from the caller stack.
             callback_file_path, callback_line_number = ARCA_CALLBACK_FINDER_REGEXP.match(caller.first)[1..2]
