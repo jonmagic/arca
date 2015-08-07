@@ -88,6 +88,11 @@ Use `Arca[Ticket].report` to analyze the callbacks for the `Ticket` class.
   :external_conditionals_count => 0,
       :calculated_permutations => 2
 }
+```
+
+Try out `Arca[Ticket].analyzed_callbacks` to see where and how each callback works and the order they run in.
+
+```ruby
 > Arca[Ticket].analyzed_callbacks
 {
   :before_save => [
@@ -163,6 +168,42 @@ Use `Arca[Ticket].report` to analyze the callbacks for the `Ticket` class.
     }
   ]
 }
+```
+
+I'm working [on a project](https://help.github.com/enterprise/2.3/admin/guides/migrations/) at [GitHub](https://github.com) that feels pain when callback behavior changes so I decided to build this tool to help us manage change better and hopefully in the long run move away from ActiveRecord callbacks for most things.
+
+For the first iteration I am hoping to use this tool in a set of model lint tests that break when callback behavior changes.
+
+```ruby
+  def assert_equal(expected, actual)
+    super(expected, actual, ARCA_FAILURE_MESSAGE)
+  end
+
+  def test_foo
+    report = Arca[Foo].report
+    expected = {
+      :model_name                  => "Foo",
+      :model_file_path             => "app/models/foo.rb",
+      :callbacks_count             => 30,
+      :conditionals_count          => 3,
+      :lines_between_count         => 1026,
+      :external_callbacks_count    => 12,
+      :external_targets_count      => 3,
+      :external_conditionals_count => 2,
+      :calculated_permutations     => 11
+    }
+
+    assert_equal expected, report.to_hash
+  end
+  ```
+
+  When change happens and that test fails it outputs a helpful error message.
+
+```
+---------------------------------------------
+Please /cc @github/migration on the PR if you
+have to update this test to make it pass.
+---------------------------------------------
 ```
 
 ## License
