@@ -80,7 +80,7 @@ module Arca
             end
 
             # Bind the callback method to self and call it with args.
-            callback_method.bind(base).call(*args)
+            callback_method.bind(self).call(*args)
           end
         end
       end
