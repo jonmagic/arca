@@ -54,7 +54,7 @@ module Arca
       number_of_unique_conditionals(model.analyzed_callbacks_array)
     end
 
-    def_delegators :model, :lines_between_count, :external_callbacks_count,
+    def_delegators :@model, :lines_between_count, :external_callbacks_count,
       :external_targets_count, :external_conditionals_count
 
     # Public: Integer representing the possible number of permutations stemming
