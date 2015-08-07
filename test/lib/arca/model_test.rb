@@ -12,7 +12,7 @@ class Arca::ModelTest < Minitest::Test
   def test_source_location
     source_location = model.source_location(:set_title)
     assert_match "test/fixtures/ticket.rb", source_location[:file_path]
-    assert_equal 8, source_location[:line_number]
+    assert_equal 7, source_location[:line_number]
   end
 
   def test_source_location_with_method_symbol_with_no_associated_method
@@ -42,7 +42,7 @@ class Arca::ModelTest < Minitest::Test
   end
 
   def test_lines_between_count
-    assert_equal 6, model.lines_between_count
+    assert_equal 5, model.lines_between_count
   end
 
   def test_external_callbacks_count
