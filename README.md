@@ -16,20 +16,21 @@ Add the gem to your Gemfile and run `bundle`.
 gem 'arca'
 ```
 
-Add an initializer to require the library and configure it (`config/initializers/arca.rb` for example). Arca assumes your models exist in 'app/models'. You can override the root path or model root path if needed.
+In your test helper (`test/test_helper.rb` for example) require the Arca library and include the `Arca::Collector` in `ActiveRecord::Base`.
 
 ```
 require "arca"
 
-Arca.root_path = "/foo/bar"
-Arca.model_root_path = Arca.root_path + "/path/to/models"
+class ActiveRecord::Base
+  include Arca::Collector
+end
 ```
 
-Include `Arca::Collector` in the models you want to analyze. It must be included before any callbacks so I recommend including it right after the class definition.
+In this example the `Annoucements` module is included in `Ticket` and defines it's own callback.
+
 
 ```ruby
 class Ticket < ActiveRecord::Base
-  include Arca::Collector if Rails.env.development?
   include Announcements
 
   before_save :set_title, :set_body
@@ -53,8 +54,6 @@ class Ticket < ActiveRecord::Base
 end
 ```
 
-In this example the `Annoucements` module is included in `Ticket` and defines it's own callback.
-
 ```ruby
 module Announcements
   def self.included(base)
@@ -69,7 +68,7 @@ module Announcements
 end
 ```
 
-Next use `Arca[Ticket].report` to analyze the callbacks for the `Ticket` class.
+Use `Arca[Ticket].report` to analyze the callbacks for the `Ticket` class.
 
 ```ruby
 > Arca.root_path = `pwd`.chomp

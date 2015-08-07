@@ -1,5 +1,8 @@
+require "forwardable"
+
 module Arca
   class Report
+    extend Forwardable
 
     # Arca::Report takes an Arca::Model and compiles the analyzed callback data
     # into a short overview report for the model.
@@ -51,8 +54,8 @@ module Arca
       number_of_unique_conditionals(model.analyzed_callbacks_array)
     end
 
-    delegate :lines_between_count, :external_callbacks_count,
-      :external_targets_count, :external_conditionals_count, :to => :model
+    def_delegators :model, :lines_between_count, :external_callbacks_count,
+      :external_targets_count, :external_conditionals_count
 
     # Public: Integer representing the possible number of permutations stemming
     # from conditionals for an instance of the model being reported during the

@@ -1,5 +1,4 @@
 class Ticket < ActiveRecord::Base
-  include Arca::Collector
   include Announcements
 
   before_save :set_title, :set_body

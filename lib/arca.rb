@@ -32,19 +32,7 @@ module Arca
 
   # Public: String representing the root path for the project.
   def self.root_path
-    @root_path ||= `pwd`.chomp
-  end
-
-  # Public: Writer method for configuring the root path to the models
-  # for the project where Arca is being used. This path is required by the
-  # Arca::Collector for finding the correct line in the caller Array.
-  def self.model_root_path=(path)
-    @model_root_path = path.to_s
-  end
-
-  # Public: String representing the path to the models for the project.
-  def self.model_root_path
-    @model_root_path ||= root_path + "/app/models"
+    @root_path ||= Dir.pwd
   end
 
   # Public: Helper method for turning absolute paths into relative paths.
@@ -55,8 +43,8 @@ module Arca
   def self.relative_path(path)
     return if path.nil?
 
-    if @root_path
-      path.sub(/^#{Regexp.escape(@root_path) || ""}\//, "")
+    if root_path
+      path.sub(/^#{Regexp.escape(root_path) || ""}\//, "")
     else
       path
     end

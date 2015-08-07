@@ -6,26 +6,19 @@ module Arca
 
     # Internal: Regular expression used for extracting the file path and line
     # number from a caller line.
-    ARCA_LINE_PARSER_REGEXP = /\A(.+)\:(\d+)\:in\s(.+)\z/
-    private_constant :ARCA_LINE_PARSER_REGEXP
+    ARCA_CALLBACK_FINDER_REGEXP = /\A(.+)\:(\d+)\:in\s`.+'\z/
+    private_constant :ARCA_CALLBACK_FINDER_REGEXP
 
     # Internal: Array of conditional symbols.
-    ARCA_CONDITIONALS = [:if, :unless]
+    ARCA_CONDITIONALS = [:if, :unless, :on]
     private_constant :ARCA_CONDITIONALS
 
     # http://ruby-doc.org/core-2.2.1/Module.html#method-i-included
     def self.included(base)
-      # Get the file path to the model class that included the collector.
-      model_file_path, = caller[0].partition(":")
-
       base.class_eval do
-        # Define :arca_callback_data for storing the data we collect.
-        define_singleton_method :arca_callback_data do
-          @callbacks ||= {}
+        define_singleton_method(:arca_callback_data) do
+          @arca_callback_data ||= Hash.new {|k,v| k[v] = [] }
         end
-
-        # Collect the model_file_path.
-        arca_callback_data[:model_file_path] = model_file_path
 
         # Find the callback methods defined on this class.
         callback_method_symbols = singleton_methods.grep /^(after|around|before)\_/
@@ -36,23 +29,32 @@ module Arca
 
           # Redefine the callback method so that data can be collected each time
           # the callback is used for this class.
-          define_singleton_method(callback_method.name) do |*args|
+          define_singleton_method(callback_method.name) do |*args, &block|
             # Duplicate args before modifying.
             args_copy = args.dup
 
-            # Get the options hash from the end of the args Array if it exists.
-            options = args_copy.pop if args[-1].is_a?(Hash)
+            # Add target_symbol :block to args_copy if a block was given.
+            if block
+              args_copy << :block
+            else
+              # Get the options hash from the end of the args Array if it exists.
+              options = args_copy.pop if args[-1].is_a?(Hash)
+            end
+
+            # Get the callback file path and line number from the caller stack.
+            callback_file_path, callback_line_number = ARCA_CALLBACK_FINDER_REGEXP.match(caller.first)[1..2]
+
+            # Extract the model file path from the caller stack.
+            caller.each do |line|
+              if match = /\A(.+):\d+:in\s`<class:#{name.split("::").last}>'/.match(line)
+                self.arca_callback_data[:model_file_path] = match[1]
+                break
+              end
+            end
 
             # Iterate through the rest of the args. Each remaining arguement is
             # a Symbol representing the callback target method.
             args_copy.each do |target_symbol|
-
-              # Find the caller line where the callback is used.
-              line = caller.find {|line| line =~ /#{Regexp.escape(Arca.model_root_path)}/ }
-
-              # Parse the line in order to extract the file path and line number.
-              callback_line_matches     = line.match(ARCA_LINE_PARSER_REGEXP)
-
               # Find the conditional symbol if it exists in the options hash.
               conditional_symbol = ARCA_CONDITIONALS.
                 find {|conditional| options && options.has_key?(conditional) }
@@ -70,8 +72,8 @@ module Arca
               # this callback_symbol.
               arca_callback_data[callback_symbol] << {
                 :callback_symbol                => callback_symbol,
-                :callback_file_path             => callback_line_matches[1],
-                :callback_line_number           => callback_line_matches[2].to_i,
+                :callback_file_path             => callback_file_path,
+                :callback_line_number           => callback_line_number.to_i,
                 :target_symbol                  => target_symbol,
                 :conditional_symbol             => conditional_symbol,
                 :conditional_target_symbol      => conditional_target_symbol
@@ -80,7 +82,7 @@ module Arca
             end
 
             # Bind the callback method to self and call it with args.
-            callback_method.bind(self).call(*args)
+            callback_method.bind(self).call(*args, &block)
           end
         end
       end
