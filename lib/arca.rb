@@ -32,7 +32,7 @@ module Arca
 
   # Public: String representing the root path for the project.
   def self.root_path
-    @root_path ||= `pwd`.chomp
+    @root_path ||= Dir.pwd
   end
 
   # Public: Writer method for configuring the root path to the models
