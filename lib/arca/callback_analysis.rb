@@ -88,6 +88,7 @@ module Arca
     # callback is used and the callback target is located.
     def lines_to_target
       return if external_target?
+      return if target_line_number.nil? || callback_line_number.nil?
 
       (target_line_number - callback_line_number).abs
     end
