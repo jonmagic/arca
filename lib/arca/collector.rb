@@ -10,7 +10,7 @@ module Arca
     private_constant :ARCA_CALLBACK_FINDER_REGEXP
 
     # Internal: Array of conditional symbols.
-    ARCA_CONDITIONALS = [:if, :unless]
+    ARCA_CONDITIONALS = [:if, :unless, :on]
     private_constant :ARCA_CONDITIONALS
 
     # http://ruby-doc.org/core-2.2.1/Module.html#method-i-included
