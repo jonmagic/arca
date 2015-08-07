@@ -1,6 +1,6 @@
 # ActiveRecord Callback Analyzer
 
-Arca is a callback analyzer for ActiveRecord like models ideally suited for digging yourself out of callback hell. At best it will help you move towards a [more maintainable design](http://adequate.io/culling-the-activerecord-lifecycle) and at worst it can be used in your test suite to give you feedback when callbacks change.
+Arca is a callback analyzer for ActiveRecord models ideally suited for digging yourself out of callback hell. At best it will help you move towards a [more maintainable design](http://adequate.io/culling-the-activerecord-lifecycle) and at worst it can be used in your test suite to give you feedback when callbacks change.
 
 Arca helps you answer questions like:
 
@@ -76,8 +76,6 @@ end
 Use `Arca[Ticket].report` to analyze the callbacks for the `Ticket` class.
 
 ```ruby
-> Arca.root_path = `pwd`.chomp
-=> "/Users/jonmagic/Projects/arca"
 > Arca[Ticket].report
 {
                    :model_name => "Ticket",
