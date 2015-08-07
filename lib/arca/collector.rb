@@ -29,12 +29,17 @@ module Arca
 
           # Redefine the callback method so that data can be collected each time
           # the callback is used for this class.
-          define_singleton_method(callback_method.name) do |*args|
+          define_singleton_method(callback_method.name) do |*args, &block|
             # Duplicate args before modifying.
             args_copy = args.dup
 
-            # Get the options hash from the end of the args Array if it exists.
-            options = args_copy.pop if args[-1].is_a?(Hash)
+            # Add target_symbol :block to args_copy if a block was given.
+            if block
+              args_copy << :block
+            else
+              # Get the options hash from the end of the args Array if it exists.
+              options = args_copy.pop if args[-1].is_a?(Hash)
+            end
 
             # Get the callback file path and line number from the caller stack.
             callback_file_path, callback_line_number = ARCA_CALLBACK_FINDER_REGEXP.match(caller.first)[1..2]
@@ -77,7 +82,7 @@ module Arca
             end
 
             # Bind the callback method to self and call it with args.
-            callback_method.bind(self).call(*args)
+            callback_method.bind(self).call(*args, &block)
           end
         end
       end

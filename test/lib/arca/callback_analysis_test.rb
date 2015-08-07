@@ -84,7 +84,7 @@ class Arca::CallbackAnalysisTest < Minitest::Test
   end
 
   def test_target_line_number
-    assert_equal 8, announce_save.target_line_number
+    assert_equal 9, announce_save.target_line_number
     assert_equal 7, set_title.target_line_number
     assert_equal 15, upcase_title.target_line_number
   end
@@ -96,7 +96,7 @@ class Arca::CallbackAnalysisTest < Minitest::Test
   end
 
   def test_lines_to_target
-    assert_equal 4, announce_save.lines_to_target
+    assert_equal 5, announce_save.lines_to_target
     assert_equal 2, set_title.lines_to_target
     assert_equal 9, upcase_title.lines_to_target
   end

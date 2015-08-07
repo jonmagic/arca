@@ -80,6 +80,7 @@ module Arca
     # Public: Boolean representing whether the callback target is located in the
     # same file where the callback is defined.
     def external_target?
+      return false if target_symbol == :block
       target_file_path != callback_file_path
     end
 
