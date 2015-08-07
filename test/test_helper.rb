@@ -4,6 +4,7 @@ require "minitest/autorun"
 require "arca"
 
 class ActiveRecord::Base
+  self.raise_in_transactional_callbacks = true
   include Arca::Collector
 end
 

@@ -113,7 +113,9 @@ module Arca
     # Public: Boolean representing whether the conditional target is located in
     # the same file where the callback is defined.
     def external_conditional_target?
-      return if conditional_target_symbol.nil?
+      return false if conditional_target_symbol.nil?
+      return false if conditional_target_symbol.is_a?(Array)
+      return false if [:create, :update, :destroy].include?(conditional_target_symbol)
 
       callback_file_path != conditional_target_file_path
     end
