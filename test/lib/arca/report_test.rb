@@ -14,14 +14,14 @@ class Arca::ReportTest < Minitest::Test
   end
 
   def callbacks_count
-    assert_equal 4, report.callbacks_count
+    assert_equal 5, report.callbacks_count
   end
 
   def test_conditionals_count
-    assert_equal 1, report.conditionals_count
+    assert_equal 2, report.conditionals_count
   end
 
   def test_calculated_permutations
-    assert_equal 2, report.calculated_permutations
+    assert_equal 3, report.calculated_permutations
   end
 end

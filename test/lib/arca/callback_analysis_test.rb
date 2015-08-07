@@ -85,8 +85,8 @@ class Arca::CallbackAnalysisTest < Minitest::Test
 
   def test_target_line_number
     assert_equal 9, announce_save.target_line_number
-    assert_equal 7, set_title.target_line_number
-    assert_equal 15, upcase_title.target_line_number
+    assert_equal 8, set_title.target_line_number
+    assert_equal 16, upcase_title.target_line_number
   end
 
   def test_external_target?
@@ -97,8 +97,8 @@ class Arca::CallbackAnalysisTest < Minitest::Test
 
   def test_lines_to_target
     assert_equal 5, announce_save.lines_to_target
-    assert_equal 2, set_title.lines_to_target
-    assert_equal 9, upcase_title.lines_to_target
+    assert_equal 3, set_title.lines_to_target
+    assert_equal 10, upcase_title.lines_to_target
   end
 
   def test_conditional_symbol
@@ -122,12 +122,12 @@ class Arca::CallbackAnalysisTest < Minitest::Test
   def test_conditional_target_line_number
     assert_nil announce_save.conditional_target_line_number
     assert_nil set_title.conditional_target_line_number
-    assert_equal 19, upcase_title.conditional_target_line_number
+    assert_equal 20, upcase_title.conditional_target_line_number
   end
 
   def test_lines_to_conditional_target
     assert_nil announce_save.lines_to_conditional_target
     assert_nil set_title.lines_to_conditional_target
-    assert_equal 13, upcase_title.lines_to_conditional_target
+    assert_equal 14, upcase_title.lines_to_conditional_target
   end
 end
