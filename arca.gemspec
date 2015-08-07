@@ -1,7 +1,7 @@
 Gem::Specification.new do |spec|
   spec.name          = "arca"
-  spec.version       = "2.0.0"
-  spec.date          = "2015-07-11"
+  spec.version       = "2.0.1"
+  spec.date          = "2015-08-07"
   spec.summary       = "ActiveRecord callback analyzer"
   spec.description   = "Arca is a callback analyzer for ActiveRecord ideally suited for digging yourself out of callback hell"
   spec.authors       = ["Jonathan Hoyt"]
