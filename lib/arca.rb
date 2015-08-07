@@ -43,8 +43,8 @@ module Arca
   def self.relative_path(path)
     return if path.nil?
 
-    if @root_path
-      path.sub(/^#{Regexp.escape(@root_path) || ""}\//, "")
+    if root_path
+      path.sub(/^#{Regexp.escape(root_path) || ""}\//, "")
     else
       path
     end
