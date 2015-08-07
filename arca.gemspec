@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.add_development_dependency "active_record", "~> 4.2"
-  spec.add_development_dependency "rake",     "~> 10.4"
-  spec.add_development_dependency "minitest", "~> 5.7"
-  spec.add_development_dependency "pry", "~> 0.10"
+  spec.add_development_dependency "minitest",      "~> 5.7"
+  spec.add_development_dependency "pry",           "~> 0.10"
+  spec.add_development_dependency "rake",          "~> 10.4"
 end
