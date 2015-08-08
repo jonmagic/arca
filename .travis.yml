@@ -7,3 +7,4 @@ rvm:
 gemfile:
   - gemfiles/Gemfile_activerecord-3.2
   - gemfiles/Gemfile_activerecord-4.2
+cache: bundler
