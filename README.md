@@ -1,7 +1,5 @@
 # ActiveRecord Callback Analyzer
 
-![travis-ci build status](https://travis-ci.org/jonmagic/arca.svg)
-
 Arca is a callback analyzer for ActiveRecord models ideally suited for digging yourself out of callback hell. At best it will help you move towards a [more maintainable design](http://adequate.io/culling-the-activerecord-lifecycle) and at worst it can be used in your test suite to give you feedback when callbacks change.
 
 Arca helps you answer questions like:
@@ -11,6 +9,12 @@ Arca helps you answer questions like:
 * how many possible permutations exist per callback type (`:commit`, `:create`, `:destroy`, `:find`, `:initialize`, `:rollback`, `:save`, `:touch`, `:update`, `:validation`) taking conditionals into consideration
 
 The Arca library has two main components, the collector and the reporter. Include the collector module in ActiveRecord::Base before your models are loaded.
+
+## Requirements
+
+![travis-ci build status](https://travis-ci.org/jonmagic/arca.svg)
+
+Arca is tested against ActiveRecord 3.2 and 4.2 running on Ruby 1.9.3, 2.0.0, 2.1.0, and 2.2.0.
 
 ## Usage
 
