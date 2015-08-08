@@ -10,6 +10,12 @@ Arca helps you answer questions like:
 
 The Arca library has two main components, the collector and the reporter. Include the collector module in ActiveRecord::Base before your models are loaded.
 
+## Requirements
+
+![travis-ci build status](https://travis-ci.org/jonmagic/arca.svg)
+
+Arca is tested against ActiveRecord 3.2 and 4.2 running on Ruby 1.9.3, 2.0.0, 2.1.0, and 2.2.0.
+
 ## Usage
 
 Add the gem to your Gemfile and run `bundle`.

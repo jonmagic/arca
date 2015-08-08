@@ -6,44 +6,35 @@ class Arca::CallbackAnalysisTest < Minitest::Test
   end
 
   def announce_save
-    @announce_save ||= Arca::CallbackAnalysis.new({
-      :model => model,
-      :callback_data => {
-        :callback_symbol => :after_save,
-        :callback_file_path => "/Users/jonmagic/Projects/arca/test/fixtures/announcements.rb",
-        :callback_line_number => 4,
-        :target_symbol => :announce_save,
-        :conditional_symbol => nil,
-        :conditional_target_symbol => nil
-      }
+    @announce_save ||= Arca::CallbackAnalysis.new(model, {
+      :callback_symbol => :after_save,
+      :callback_file_path => "#{Arca.root_path}/test/fixtures/announcements.rb",
+      :callback_line_number => 4,
+      :target_symbol => :announce_save,
+      :conditional_symbol => nil,
+      :conditional_target_symbol => nil
     })
   end
 
   def set_title
-    @set_title ||= Arca::CallbackAnalysis.new({
-      :model => model,
-      :callback_data => {
-        :callback_symbol=>:before_save,
-        :callback_file_path => "/Users/jonmagic/Projects/arca/test/fixtures/ticket.rb",
-        :callback_line_number => 5,
-        :target_symbol => :set_title,
-        :conditional_symbol => nil,
-        :conditional_target_symbol => nil
-      }
+    @set_title ||= Arca::CallbackAnalysis.new(model, {
+      :callback_symbol=>:before_save,
+      :callback_file_path => "#{Arca.root_path}/test/fixtures/ticket.rb",
+      :callback_line_number => 5,
+      :target_symbol => :set_title,
+      :conditional_symbol => nil,
+      :conditional_target_symbol => nil
     })
   end
 
   def upcase_title
-    @upcase_title ||= Arca::CallbackAnalysis.new({
-      :model => model,
-      :callback_data => {
-        :callback_symbol => :before_save,
-        :callback_file_path => "/Users/jonmagic/Projects/arca/test/fixtures/ticket.rb",
-        :callback_line_number => 6,
-        :target_symbol => :upcase_title,
-        :conditional_symbol => :if,
-        :conditional_target_symbol => :title_is_a_shout?
-      }
+    @upcase_title ||= Arca::CallbackAnalysis.new(model, {
+      :callback_symbol => :before_save,
+      :callback_file_path => "#{Arca.root_path}/test/fixtures/ticket.rb",
+      :callback_line_number => 6,
+      :target_symbol => :upcase_title,
+      :conditional_symbol => :if,
+      :conditional_target_symbol => :title_is_a_shout?
     })
   end
 

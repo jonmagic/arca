@@ -10,7 +10,7 @@ module Arca
     #
     # model         - Arca::Model instance.
     # callback_data - Hash with callback data collected by Arca::Collector.
-    def initialize(model:, callback_data:)
+    def initialize(model, callback_data)
       @model                     = model
       @callback_symbol           = callback_data.fetch(:callback_symbol)
       @callback_file_path        = callback_data.fetch(:callback_file_path)
