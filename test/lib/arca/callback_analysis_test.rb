@@ -8,7 +8,7 @@ class Arca::CallbackAnalysisTest < Minitest::Test
   def announce_save
     @announce_save ||= Arca::CallbackAnalysis.new(model, {
       :callback_symbol => :after_save,
-      :callback_file_path => "/Users/jonmagic/Projects/arca/test/fixtures/announcements.rb",
+      :callback_file_path => "#{Arca.root_path}/test/fixtures/announcements.rb",
       :callback_line_number => 4,
       :target_symbol => :announce_save,
       :conditional_symbol => nil,
@@ -19,7 +19,7 @@ class Arca::CallbackAnalysisTest < Minitest::Test
   def set_title
     @set_title ||= Arca::CallbackAnalysis.new(model, {
       :callback_symbol=>:before_save,
-      :callback_file_path => "/Users/jonmagic/Projects/arca/test/fixtures/ticket.rb",
+      :callback_file_path => "#{Arca.root_path}/test/fixtures/ticket.rb",
       :callback_line_number => 5,
       :target_symbol => :set_title,
       :conditional_symbol => nil,
@@ -30,7 +30,7 @@ class Arca::CallbackAnalysisTest < Minitest::Test
   def upcase_title
     @upcase_title ||= Arca::CallbackAnalysis.new(model, {
       :callback_symbol => :before_save,
-      :callback_file_path => "/Users/jonmagic/Projects/arca/test/fixtures/ticket.rb",
+      :callback_file_path => "#{Arca.root_path}/test/fixtures/ticket.rb",
       :callback_line_number => 6,
       :target_symbol => :upcase_title,
       :conditional_symbol => :if,
