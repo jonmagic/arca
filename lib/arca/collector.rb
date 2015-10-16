@@ -35,7 +35,18 @@ module Arca
 
             # Add target_symbol :block to args_copy if a block was given.
             if block
-              args_copy.unshift(:block)
+              args_copy.unshift(:inline)
+            elsif args_copy.first.kind_of?(Proc)
+              args_copy.shift
+              args_copy.unshift(:inline)
+            elsif !args_copy.first.kind_of?(Symbol)
+              klass_or_instance = args_copy.shift
+
+              if klass_or_instance.respond_to?(:new)
+                args_copy.unshift(klass_or_instance.name.to_sym)
+              else
+                args_copy.unshift(klass_or_instance.class.name.to_sym)
+              end
             end
 
             # Get the options hash from the end of the args Array if it exists.
@@ -78,7 +89,6 @@ module Arca
                 :conditional_symbol             => conditional_symbol,
                 :conditional_target_symbol      => conditional_target_symbol
               }
-
             end
 
             # Bind the callback method to self and call it with args.

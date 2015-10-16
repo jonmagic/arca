@@ -33,24 +33,24 @@ class Arca::ModelTest < Minitest::Test
   end
 
   def test_analyzed_callbacks_array
-    assert_equal 6, model.analyzed_callbacks_array.size
+    assert_equal 9, model.analyzed_callbacks_array.size
     assert model.analyzed_callbacks_array[0].is_a?(Arca::CallbackAnalysis)
   end
 
   def test_analyzed_callbacks_count
-    assert_equal 6, model.analyzed_callbacks_count
+    assert_equal 9, model.analyzed_callbacks_count
   end
 
   def test_lines_between_count
-    assert_equal 6, model.lines_between_count
+    assert_equal 16, model.lines_between_count
   end
 
   def test_external_callbacks_count
-    assert_equal 2, model.external_callbacks_count
+    assert_equal 5, model.external_callbacks_count
   end
 
   def test_external_targets_count
-    assert_equal 0, model.external_targets_count
+    assert_equal 1, model.external_targets_count
   end
 
   def test_external_conditionals_count
