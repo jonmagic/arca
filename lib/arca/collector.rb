@@ -40,12 +40,12 @@ module Arca
               args_copy.shift
               args_copy.unshift(:inline)
             elsif !args_copy.first.kind_of?(Symbol)
-              klass_or_instance = args_copy.shift
+              class_or_instance = args_copy.shift
 
-              if klass_or_instance.respond_to?(:new)
-                args_copy.unshift(klass_or_instance.name.to_sym)
+              if class_or_instance.class == Class
+                args_copy.unshift(class_or_instance.name.to_sym)
               else
-                args_copy.unshift(klass_or_instance.class.name.to_sym)
+                args_copy.unshift(class_or_instance.class.name.to_sym)
               end
             end
 
