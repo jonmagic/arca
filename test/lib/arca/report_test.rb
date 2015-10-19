@@ -22,6 +22,6 @@ class Arca::ReportTest < Minitest::Test
   end
 
   def test_calculated_permutations
-    assert_equal 3, report.calculated_permutations
+    assert_equal 6, report.calculated_permutations
   end
 end
