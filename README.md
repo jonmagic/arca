@@ -213,6 +213,10 @@ have to update this test to make it pass.
 ---------------------------------------------
 ```
 
+Another approach to testing callbacks is to whitelist existing callbacks, and
+add a lint test to ensure new callbacks are not added without review. The
+[examples](examples) is a good starting point.
+
 ## License
 
 The MIT License (MIT)
