@@ -34,7 +34,8 @@ class ActiveRecord::Base
   include Arca::Collector
 end
 
-# load your app
+# load your app. It's important to setup before loading your models because arca
+# works by record callback definitions.
 ```
 
 In this example the `Annoucements` module is included in `Ticket` and defines it's own callback.
