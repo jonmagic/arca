@@ -10,9 +10,7 @@ Arca helps you answer questions like:
 
 The Arca library has two main components, the collector and the reporter. Include the collector module in ActiveRecord::Base before your models are loaded.
 
-At GitHub, we test callbacks by whitelist existing callbacks, and adding a lint
-test to ensure new callbacks are not added without review. The
-[examples](examples) folder is a good starting point.
+At GitHub, we test callbacks by whitelisting existing callbacks, and adding a lint test to ensure new callbacks are not added without review. The [examples](examples) folder is a good starting point.
 
 ## Requirements
 
