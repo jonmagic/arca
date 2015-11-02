@@ -33,8 +33,8 @@ module Arca
             # Duplicate args before modifying.
             args_copy = args.dup
 
-            # Add target_symbol :inline to args_copy if a block, Proc, or Class
-            # was given.
+            # Add target_symbol :inline to args_copy if given a block or Proc and 
+            # class name if a class or instance was given.
             if block
               args_copy.unshift(:inline)
             elsif args_copy.first.kind_of?(Proc)
