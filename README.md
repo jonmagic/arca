@@ -10,6 +10,10 @@ Arca helps you answer questions like:
 
 The Arca library has two main components, the collector and the reporter. Include the collector module in ActiveRecord::Base before your models are loaded.
 
+At GitHub, we test callbacks by whitelist existing callbacks, and adding a lint
+test to ensure new callbacks are not added without review. The
+[examples](examples) folder is a good starting point.
+
 ## Requirements
 
 ![travis-ci build status](https://travis-ci.org/jonmagic/arca.svg)
@@ -34,7 +38,9 @@ class ActiveRecord::Base
   include Arca::Collector
 end
 
-# load your app
+# load your app. It's important to setup before loading your models because Arca
+# works by wrapping itself around the callback method definitions (before_save,
+# after_save, etc) and then records how and where those methods are used.
 ```
 
 In this example the `Annoucements` module is included in `Ticket` and defines it's own callback.
