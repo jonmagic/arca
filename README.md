@@ -1,6 +1,6 @@
 # ActiveRecord Callback Analyzer
 
-Arca is a callback analyzer for ActiveRecord models ideally suited for digging yourself out of callback hell. At best it will help you move towards a [more maintainable design]([http://adequate.io/culling-the-activerecord-lifecycle](https://web.archive.org/web/20161016162603/http://adequate.io/culling-the-activerecord-lifecycle)) and at worst it can be used in your test suite to give you feedback when callbacks change.
+Arca is a callback analyzer for ActiveRecord models ideally suited for digging yourself out of callback hell. At best it will help you move towards a [more maintainable design](https://web.archive.org/web/20161016162603/http://adequate.io/culling-the-activerecord-lifecycle) and at worst it can be used in your test suite to give you feedback when callbacks change.
 
 Arca helps you answer questions like:
 
