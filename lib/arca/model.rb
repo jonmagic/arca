@@ -15,9 +15,11 @@ module Arca
     # they are used in the life cycle of an ActiveRecord model.
     CALLBACKS = [
       :after_initialize, :after_find, :after_touch, :before_validation, :after_validation,
-      :before_save, :around_save, :after_save, :before_create, :around_create,
-      :after_create, :before_update, :around_update, :after_update,
-      :before_destroy, :around_destroy, :after_destroy, :after_commit, :after_rollback
+      :before_save, :around_save, :after_save, :after_save_commit,
+      :before_create, :around_create, :after_create, :after_create_commit,
+      :before_update, :around_update, :after_update, :after_update_commit,
+      :before_destroy, :around_destroy, :after_destroy, :after_destroy_commit,
+      :after_commit, :after_rollback
     ]
 
     # Public: ActiveRecord model class.
