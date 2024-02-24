@@ -216,6 +216,12 @@ have to update this test to make it pass.
 ---------------------------------------------
 ```
 
+## Contributors
+
+- [@jonmagic](https://github.com/jonmagic)
+- [@jch](https://github.com/jch)
+- [@bensheldon](https://github.com/bensheldon)
+
 ## License
 
 The MIT License (MIT)
