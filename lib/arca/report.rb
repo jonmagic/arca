@@ -61,7 +61,7 @@ module Arca
     # from conditionals for an instance of the model being reported during the
     # lifecycle of the object.
     def calculated_permutations
-      permutations = model.analyzed_callbacks.inject([]) do |results, (key, analyzed_callbacks)|
+      model.analyzed_callbacks.inject([]) do |results, (key, analyzed_callbacks)|
         results << 2 ** number_of_unique_conditionals(analyzed_callbacks)
       end.sum - number_of_unique_conditionals(model.analyzed_callbacks_array)
     end
