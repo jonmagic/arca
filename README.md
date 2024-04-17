@@ -221,6 +221,7 @@ have to update this test to make it pass.
 - [@jonmagic](https://github.com/jonmagic)
 - [@jch](https://github.com/jch)
 - [@bensheldon](https://github.com/bensheldon)
+- [@jasonkim](https://github.com/jasonkim)
 
 ## License
 
