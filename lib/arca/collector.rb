@@ -21,7 +21,7 @@ module Arca
         end
 
         # Find the callback methods defined on this class.
-        callback_method_symbols = singleton_methods.grep /^(after|around|before)\_/
+        callback_method_symbols = singleton_methods.grep(/^(after|around|before)\_/)
 
         callback_method_symbols.each do |callback_symbol|
           # Find the UnboundMethod for the callback.
