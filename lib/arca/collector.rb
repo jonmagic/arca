@@ -6,7 +6,7 @@ module Arca
 
     # Internal: Regular expression used for extracting the file path and line
     # number from a caller line.
-    ARCA_CALLBACK_FINDER_REGEXP = /\A(.+)\:(\d+)\:in\s`.+'\z/
+    ARCA_CALLBACK_FINDER_REGEXP = /\A(.+)\:(\d+)\:in\s[`'].+'\z/
     private_constant :ARCA_CALLBACK_FINDER_REGEXP
 
     # Internal: Array of conditional symbols.
@@ -58,7 +58,7 @@ module Arca
 
             # Extract the model file path from the caller stack.
             caller.each do |line|
-              if match = /\A(.+):\d+:in\s`<class:#{name.split("::").last}>'/.match(line)
+              if match = /\A(.+):\d+:in\s[`']<class:#{name.split("::").last}>'/.match(line)
                 self.arca_callback_data[:model_file_path] = match[1]
                 break
               end
