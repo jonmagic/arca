@@ -21,7 +21,7 @@ module Arca
         end
 
         # Find the callback methods defined on this class.
-        callback_method_symbols = singleton_methods.grep /^(after|around|before)\_/
+        callback_method_symbols = singleton_methods.grep(/^(after|around|before)\_/)
 
         callback_method_symbols.each do |callback_symbol|
           # Find the UnboundMethod for the callback.
@@ -33,7 +33,7 @@ module Arca
             # Duplicate args before modifying.
             args_copy = args.dup
 
-            # Add target_symbol :inline to args_copy if given a block or Proc and 
+            # Add target_symbol :inline to args_copy if given a block or Proc and
             # class name if a class or instance was given.
             if block
               args_copy.unshift(:inline)

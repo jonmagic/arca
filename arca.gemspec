@@ -13,8 +13,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/jonmagic/arca"
   spec.license       = "MIT"
 
-  spec.add_development_dependency "activerecord",  "~> 4.2"
-  spec.add_development_dependency "minitest",      "~> 5.7"
-  spec.add_development_dependency "pry",           "~> 0.10"
-  spec.add_development_dependency "rake",          "~> 10.4"
+  spec.add_development_dependency "activerecord",  "~> 7.1"
+  spec.add_development_dependency "minitest",      "~> 5.22"
+  spec.add_development_dependency "pry",           "~> 0.14"
+  spec.add_development_dependency "rake",          "~> 13.2"
 end
